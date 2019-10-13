@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import * as serviceWorker from './serviceWorker';
 import Config from './config.js';
 import axios from 'axios';
 import {
@@ -14,10 +13,6 @@ import {
 import Nav from './components/Nav';
 import PhotoContainer from './components/PhotoContainer';
 import Search from './components/Search';
-//import Dogs from './components/Dogs';
-//import Cats from './components/Cats';
-//import Hamsters from './components/Hamsters';
-//import NotFound from './components/NotFound';
 
 export default class App extends Component {  
 
@@ -66,8 +61,3 @@ export default class App extends Component {
         )
     }
 }
-
-ReactDOM.render (
-  <App />,
-  document.querySelector('#root')
-);
