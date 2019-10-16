@@ -19,7 +19,10 @@ const PhotoContainer = props => {
 
   return (
     <div className="photo-container">
-      <h2>{props.getSearchValue}</h2>
+      <h2>
+       {/* {props.SearchValue} */}
+        Results
+      </h2>
       <ul>
         {photos}
       </ul>
