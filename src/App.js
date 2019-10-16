@@ -6,7 +6,6 @@ import {
   BrowserRouter,
   Route,
   Switch,
-  Redirect
 } from 'react-router-dom';
 import NotFound from './components/NotFound';
 
@@ -43,9 +42,9 @@ export default class App extends Component {
   }
 
   //trying to get input value to pass it to PhotoContainer
-  getSearchValue = (value) => {
-    return value;
-  }
+  // getSearchValue = (value) => {
+  //   return value;
+  // }
 
   displayLoading = (isLoading) => {
     return (
@@ -82,17 +81,18 @@ export default class App extends Component {
 
           <Route exact path="/search" component={Nav}>
             <div className="container">
-              <Nav onSearch={this.performSearch} getSearchValue={() => this.getSearchValue}/>
-              { this.displayLoading (this.state.loading)} 
-            </div>
-          </Route>
-
-          <Route path="/search/:search" component={Nav}>
-            <div className="container">
               <Nav onSearch={this.performSearch}/>
               { this.displayLoading (this.state.loading)} 
             </div>
           </Route>
+
+          {/* <Route path="/search/:search" component={Nav}>
+            <div className="container">
+              <Nav onSearch={this.performSearch}
+                getSearchValue={() => this.getSearchValue}/>
+              { this.displayLoading (this.state.loading)} 
+            </div>
+          </Route> */}
 
           <Route path="/nav" component={Nav}>
             <div className="container">
