@@ -1,28 +1,27 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { NavLink,
-        BrowserRouter,
-        Route } from 'react-router-dom';
-//import Dogs from './Dogs';
+import { NavLink } from 'react-router-dom';
+import Search from './Search';
 
-const Link = (props) => {
-    return (
-      <nav className="main-nav">
-        <ul>
-          <BrowserRouter>
-            <li>
-              <NavLink to="/cats" onClick={() => props.choose('Cats')}>Cats</NavLink>
-            </li>
-            <li>
-              <NavLink to="/dogs" onClick={() => props.choose('Dog')}>Dogs</NavLink>
-            </li>
-            <li>
-              <NavLink to="/hamsters" onClick={() => props.choose('Hamster')}>Hamsters</NavLink>
-            </li>
-          </BrowserRouter>
-        </ul>
-      </nav>
+const Nav = (props) => {
+
+  //let search = match.params.search;
+
+  return (
+    <nav className="main-nav">
+      <Search onSearch={props.onSearch}/>
+      <ul>
+        <li>
+          <NavLink to="/cats" onClick={() => props.onSearch('Cats')}>Cats</NavLink>
+        </li>
+        <li>
+          <NavLink to="/dogs" onClick={() => props.onSearch('Dog')}>Dogs</NavLink>
+        </li>
+        <li>
+          <NavLink to="/hamsters" onClick={() => props.onSearch('Hamster')}>Hamsters</NavLink>
+        </li>
+      </ul>
+  </nav>
   );
 }
 
-export default Link;
+export default Nav;
