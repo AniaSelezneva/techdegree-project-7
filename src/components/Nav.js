@@ -2,9 +2,11 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Search from './Search';
 
-const Nav = (props) => {
+const Nav = (props
+  // , {match}
+  ) => {
 
-  //let search = match.params.search;
+  //let searchValue = match.params.getSearchValue;
 
   return (
     <nav className="main-nav">
