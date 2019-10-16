@@ -27,14 +27,16 @@ export default class Search extends Component {
 
   render () {
     return (
-      <form className="search-form" onSubmit={this.handleSubmit} onSubmit={this.submit}>
+      <form className="search-form" onSubmit={this.handleSubmit}>
         <input type="search" 
           ref={(input) => { this.query = input}}
           onChange={this.onSearchChange}
           name="search" 
           placeholder="Search" 
           required/>
-          <NavLink to="/search" onClick={() => {this.props.onSearch(this.query.value)}}>
+          <NavLink to="/search" onClick={() => {this.props.onSearch(this.query.value)
+            // ; this.props.getSearchValue(this.query.value)
+            }}>
             <button type="submit" className="search-button">
             
               <svg fill="#fff" height="24" viewBox="0 0 23 23" width="24" xmlns="http://www.w3.org/2000/svg">
