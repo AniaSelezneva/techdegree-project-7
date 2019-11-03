@@ -1,29 +1,34 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import Search from './Search';
+import React, { Component } from "react";
 
-const Nav = (props
-  // , {match}
-  ) => {
+class Nav extends Component {
+  state = {};
 
-  //let searchValue = match.params.getSearchValue;
+  handleClick = query => {
+    this.props.fetchSearchResults(query, 1);
+  };
 
-  return (
-    <nav className="main-nav">
-      <Search onSearch={props.onSearch}/>
-      <ul>
-        <li>
-          <NavLink to="/cats" onClick={() => props.onSearch('Cats')}>Cats</NavLink>
-        </li>
-        <li>
-          <NavLink to="/dogs" onClick={() => props.onSearch('Dog')}>Dogs</NavLink>
-        </li>
-        <li>
-          <NavLink to="/hamsters" onClick={() => props.onSearch('Hamster')}>Hamsters</NavLink>
-        </li>
-      </ul>
-  </nav>
-  );
+  render() {
+    return (
+      <nav className="main-nav">
+        <ul>
+          <li>
+            <a
+              href="/search?query=cat"
+              onClick={event => this.handleClick("cat")}
+            >
+              Cats
+            </a>
+          </li>
+          <li>
+            <a href="/search?query=dog">Dogs</a>
+          </li>
+          <li>
+            <a href="/search?query=dolphin">Dolphins</a>
+          </li>
+        </ul>
+      </nav>
+    );
+  }
 }
 
 export default Nav;
