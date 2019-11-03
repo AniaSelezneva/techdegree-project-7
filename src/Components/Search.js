@@ -28,9 +28,10 @@ export default class Search extends Component {
 
   componentDidMount = () => {
     const query = this.props.location.search.replace(/.+(=)/, "");
-    this.setState({ query });
+    this.setState({ query }, () => {
+      this.props.fetchSearchResults(query);
+    });
     this.props.setQuery(query);
-    this.props.fetchSearchResults(query);
   };
 
   handleSubmit = event => {
