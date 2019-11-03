@@ -1,11 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default props => {
   const { handleClick, showNextLink, showPrevLink, loading } = props;
   return (
     <div className="nav-link-container">
-      <a
-        href="#"
+      <Link
+        to="#"
         className={`nav-link ${showPrevLink ? "show" : "hide"} ${
           loading ? "greyed-out" : ""
         }`}
@@ -15,9 +16,9 @@ export default props => {
         }}
       >
         Prev
-      </a>
-      <a
-        href="#"
+      </Link>
+      <Link
+        to="#"
         className={`nav-link ${showNextLink ? "show" : "hide"} ${
           loading ? "greyed-out" : ""
         }`}
@@ -27,7 +28,7 @@ export default props => {
         }}
       >
         Next
-      </a>
+      </Link>
     </div>
   );
 };
