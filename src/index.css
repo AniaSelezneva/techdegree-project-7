@@ -123,15 +123,23 @@ input {
     width: 100px;
   }
 
+  /*Loader*/
   .search-loading {
     position: absolute;
-    margin-top: -15%;
-    margin-left: -11%;
+    top: 50%;
+    left: 50%;
+    margin: -50px 0px 0px -50px;
+    z-index: 1;
   }
 
   /*Loader show and hide*/
   .show {
     display: inline-block;
+  }
+
+  .loading-image {
+    display: block;
+    margin: 0 auto;
   }
 
   .hide {
