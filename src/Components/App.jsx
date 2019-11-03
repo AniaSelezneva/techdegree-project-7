@@ -2,10 +2,9 @@ import React, { Component } from "react";
 import "../index.css";
 import Config from "../config.js";
 import axios from "axios";
-
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-//components
+//import components
 import Nav from "./Nav";
 import PhotoContainer from "./PhotoContainer";
 import Search from "./Search";
@@ -27,16 +26,17 @@ export default class App extends Component {
     this.cancel = "";
   }
 
-  setTotal = (totalResults, totalPages, currentPageNumber) => {
-    this.setState({ totalResults });
-    this.setState({ totalPages });
-    this.setState({ currentPageNumber });
-  };
-
+  //set "query" state from Search component
   setQuery = query => {
     this.setState({ query });
   };
 
+  //set "loader" state from Search component
+  setLoader = bool => {
+    this.setState({ loading: bool });
+  };
+
+  //handle clicks on "prev" and "next" buttons
   handlePageClick = type => {
     const updatePage =
       type === "prev"
@@ -50,19 +50,18 @@ export default class App extends Component {
     }
   };
 
+  //get total amount of pages
   getPageCount = (total, denominator) => {
     const divisible = 0 === total % denominator; //true or false
     const valueToBeAdded = divisible ? 0 : 1;
     return Math.floor(total / denominator) + valueToBeAdded;
   };
 
-  setLoader = bool => {
-    this.setState({ loading: bool });
-  };
-
+  //fetch search results, deal with "not found" situation, update state
   fetchSearchResults = (searchText, updatedPageNumber) => {
     updatedPageNumber = this.state.currentPageNumber;
     const pageNumber = updatedPageNumber ? `&page=${updatedPageNumber}` : ``;
+    //cancel previous request, not to have too many of them
     if (this.cancel) {
       this.cancel.cancel();
     }
@@ -76,8 +75,8 @@ export default class App extends Component {
       .then(response => {
         const totalResults = response.data.photos.total;
         const totalPages = this.getPageCount(totalResults, 24);
-        this.makeURLarray(response.data.photos.photo);
-
+        this.makeURLarray(response.data.photos.photo); //set a "urls" state to pass to "PhotoContainer" component
+        //set a "message" state if there are no results
         if (totalResults == 0) {
           this.setState({
             message: "Sorry, nothing was found"
@@ -87,7 +86,7 @@ export default class App extends Component {
             message: ""
           });
         }
-
+        //update state
         this.setState({
           loading: false,
           totalResults,
@@ -99,12 +98,13 @@ export default class App extends Component {
         if (axios.isCancel(error)) {
           //do nothing
         } else {
-          // Handle usual errors
+          // handle usual errors
           console.log("Something went wrong: ", error.message);
         }
       });
   };
 
+  //helper function to use in fetchSearchResults function
   makeURLarray(results) {
     const urls = results.map(
       result =>
@@ -113,10 +113,7 @@ export default class App extends Component {
     this.setState({ urls });
   }
 
-  setUrls = urls => {
-    this.setState({ urls });
-  };
-
+  //wrapper for "Search", "PhotoContainer" and "PageNavigation" components
   wrapper = props => {
     const {
       loading,
@@ -139,15 +136,13 @@ export default class App extends Component {
     const showNextLink = totalPages > currentPageNumber;
 
     return (
-      <React.Fragment>
+      <>
         <Search
           {...props}
           fetchSearchResults={this.fetchSearchResults}
           setLoader={this.setLoader}
-          setUrls={this.setUrls}
           setTotal={this.setTotal}
           setQuery={this.setQuery}
-          currentPageNumber={currentPageNumber}
         />
         <Nav />
 
@@ -171,7 +166,7 @@ export default class App extends Component {
         ) : (
           <h2>{message}</h2>
         )}
-      </React.Fragment>
+      </>
     );
   };
 
@@ -182,11 +177,6 @@ export default class App extends Component {
           <Route exact path="/search" render={props => this.wrapper(props)} />
           <Route path="/nav" component={Nav} />
           <Route exact path="/" render={props => this.wrapper(props)}></Route>
-          <Route
-            path="/search/:searchText"
-            render={props => this.wrapper(props)}
-          />
-
           <Route component={NotFound} />
         </Switch>
       </BrowserRouter>
