@@ -11,13 +11,9 @@ export default class Search extends Component {
   handleSearch = event => {
     this.props.setLoader(true);
     const query = event.target.value;
-
     this.setState({ query });
     if (!query) {
       this.props.setQuery("");
-      this.props.setLoader(false);
-      this.props.setUrls([]);
-      this.props.setTotal(0, 0, 1, "");
       this.redirect(`/`);
     } else {
       this.props.fetchSearchResults(query);
@@ -44,7 +40,6 @@ export default class Search extends Component {
 
   render() {
     const { query } = this.state;
-
     return (
       <form className="search-form" onSubmit={this.handleSubmit}>
         <input
@@ -57,7 +52,6 @@ export default class Search extends Component {
           }}
           required
         />
-
         <button type="submit" className="search-button">
           <svg
             fill="#fff"
