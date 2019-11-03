@@ -1,6 +1,6 @@
 body {
   text-align: center;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   color: #3f4850;
 }
 
@@ -25,7 +25,7 @@ a {
   margin: 0 auto 32px;
 }
 
-.search-form button {
+.search-form a button {
   outline: none;
   background-color: #438bbd;
   border: none;
@@ -93,7 +93,7 @@ input {
   width: 100%;
 }
 
-@media only screen and (max-width: 767px)  {
+@media only screen and (max-width: 767px) {
   body {
     padding-top: 2em;
   }
@@ -103,7 +103,7 @@ input {
   }
 }
 
-@media only screen and (min-width: 768px)  {
+@media only screen and (min-width: 768px) {
   body {
     padding-top: 4em;
   }
@@ -117,7 +117,7 @@ input {
     display: flex;
     justify-content: center;
   }
-  
+
   .main-nav li {
     margin: 10px;
     width: 100px;
