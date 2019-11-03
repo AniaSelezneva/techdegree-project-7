@@ -77,7 +77,7 @@ export default class App extends Component {
         const totalPages = this.getPageCount(totalResults, 24);
         this.makeURLarray(response.data.photos.photo); //set a "urls" state to pass to "PhotoContainer" component
         //set a "message" state if there are no results
-        if (totalResults == 0) {
+        if (totalResults < 1) {
           this.setState({
             message: "Sorry, nothing was found"
           });
